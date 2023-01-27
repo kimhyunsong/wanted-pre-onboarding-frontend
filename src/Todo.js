@@ -1,9 +1,18 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import  { useNavigate } from "react-router-dom"
-import axiosInstance from "./httpService"
 
 function Todo(){
+
+  const axiosInstance = axios.create({
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,
+      "Accept": "application/json;charset=UTF-8",
+      "Content-Type": "application/json;charset=UTF-8"
+    }
+  })
+
+
   const navigate = useNavigate()
   const [todoList, setTodoList] = useState([])
   const [checkedList, setCheckedList] = useState([])
@@ -35,6 +44,7 @@ function Todo(){
 
 
   const createTodo = (async()=>{
+    
     await axiosInstance.post(process.env.REACT_APP_HOST + "todos", {todo:todo})
     .then((res)=>{
       axiosData()

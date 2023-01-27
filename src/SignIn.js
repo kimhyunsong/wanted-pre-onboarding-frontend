@@ -1,9 +1,17 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import  { redirect, useNavigate } from "react-router-dom"
-import axiosInstance from "./httpService";
+
 
 function SignIn(){
+
+  const axiosInstance = axios.create({
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("AccessToken")}`,
+      "Accept": "application/json;charset=UTF-8",
+      "Content-Type": "application/json;charset=UTF-8"
+    }
+  })
   const navigate = useNavigate();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
