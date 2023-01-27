@@ -32,7 +32,7 @@ function SignIn(){
   })
   useEffect(()=>{
     if (window.localStorage.getItem("AccessToken")){
-      setTimeout(navigate('/todo'), 100)
+      navigate('/todo')
     }
   }, [])
 
